@@ -5,7 +5,7 @@ import { ResisterloginComponent } from './components/resisterlogin/resisterlogin
 
 const routes: Routes = [
     { path: "", component: LandingComponent },
-    { path: "/registerlogin", component: ResisterloginComponent }
+    { path: "registerlogin", component: ResisterloginComponent }
 ];
 
 @NgModule({

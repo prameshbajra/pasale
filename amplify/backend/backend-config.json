@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "pasale12252181": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
