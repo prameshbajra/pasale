@@ -4,8 +4,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { ResisterloginComponent } from './components/resisterlogin/resisterlogin.component';
 
 const routes: Routes = [
-    { path: "", component: LandingComponent },
-    { path: "registerlogin", component: ResisterloginComponent }
+    { path: "", component: ResisterloginComponent }
 ];
 
 @NgModule({
