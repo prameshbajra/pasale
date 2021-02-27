@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "pasale"
+    }
+  },
+  "defaultProject": "pasale",
+  "cli": {
+    "analytics": false
+  }
 }
