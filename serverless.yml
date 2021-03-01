@@ -18,25 +18,26 @@ provider:
           Resource:
             - "arn:aws:s3:::pasale-content/*"
 
-package:
-  individually: true
-  exclude:
-      - backend/node_modules/**
-      - frontend
-      - node_modules/**
-
-plugins:
-  - serverless-finch
-
 custom:
   client:
     bucketName: pasale
     distributionFolder: frontend/dist/pasale/
     errorDocument: index.html
 
+package:
+  individually: true
+  exclude:
+      - node_modules/**
+      - frontend/**
+
+plugins:
+  - serverless-finch
+
+
 functions:
   addItemsToDB:
     handler: backend/addItemToDB.addItemToDB
+    timeout: 30
     events:
       - http:
           path: /addItemToDB

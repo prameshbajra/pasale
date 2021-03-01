@@ -194,13 +194,13 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/pasale/dev/1614591549321-2021-03-01T09:39:09.321Z/addItemsToDB.zip"
+                "S3Key": "serverless/pasale/dev/1614593830574-2021-03-01T10:17:10.574Z/addItemsToDB.zip"
               },
               "Handler": "backend/addItemToDB.addItemToDB",
               "Runtime": "nodejs14.x",
               "FunctionName": "pasale-dev-addItemsToDB",
               "MemorySize": 1024,
-              "Timeout": 6,
+              "Timeout": 30,
               "Role": {
                 "Fn::GetAtt": [
                   "IamRoleLambdaExecution",
@@ -268,7 +268,7 @@
                     "ResponseParameters": {
                       "method.response.header.Access-Control-Allow-Origin": "'*'",
                       "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
                     },
                     "ResponseTemplates": {
                       "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
@@ -284,10 +284,10 @@
               }
             }
           },
-          "ApiGatewayMethodAdditemtodbAny": {
+          "ApiGatewayMethodAdditemtodbGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
-              "HttpMethod": "ANY",
+              "HttpMethod": "GET",
               "RequestParameters": {},
               "ResourceId": {
                 "Ref": "ApiGatewayResourceAdditemtodb"
@@ -327,7 +327,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1614591521355": {
+          "ApiGatewayDeployment1614593801507": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -337,7 +337,7 @@
             },
             "DependsOn": [
               "ApiGatewayMethodAdditemtodbOptions",
-              "ApiGatewayMethodAdditemtodbAny"
+              "ApiGatewayMethodAdditemtodbGet"
             ]
           },
           "AddItemsToDBLambdaPermissionApiGateway": {
@@ -565,11 +565,12 @@
     "functions": {
       "addItemsToDB": {
         "handler": "backend/addItemToDB.addItemToDB",
+        "timeout": 30,
         "events": [
           {
             "http": {
               "path": "addItemToDB",
-              "method": "any",
+              "method": "get",
               "cors": {
                 "origins": [
                   "*"
@@ -577,7 +578,7 @@
                 "origin": "*",
                 "methods": [
                   "OPTIONS",
-                  "ANY"
+                  "GET"
                 ],
                 "headers": [
                   "Content-Type",
@@ -598,7 +599,6 @@
           "artifact": "D:\\personalworks\\pasale\\.serverless\\addItemsToDB.zip"
         },
         "memory": 1024,
-        "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {}
       }
@@ -677,20 +677,19 @@
       "provider": {
         "$ref": "$[\"service\"][\"provider\"]"
       },
+      "custom": {
+        "$ref": "$[\"service\"][\"custom\"]"
+      },
       "package": {
         "individually": true,
         "exclude": [
           "node_modules/**",
-          "frontend/node_modules/**",
-          "venv/**"
+          "frontend/**"
         ],
-        "artifactDirectoryName": "serverless/pasale/dev/1614591549321-2021-03-01T09:39:09.321Z"
+        "artifactDirectoryName": "serverless/pasale/dev/1614593830574-2021-03-01T10:17:10.574Z"
       },
       "plugins": {
         "$ref": "$[\"service\"][\"plugins\"]"
-      },
-      "custom": {
-        "$ref": "$[\"service\"][\"custom\"]"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -703,7 +702,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/pasale/dev/1614591549321-2021-03-01T09:39:09.321Z",
+    "artifactDirectoryName": "serverless/pasale/dev/1614593830574-2021-03-01T10:17:10.574Z",
     "artifact": ""
   }
 }
