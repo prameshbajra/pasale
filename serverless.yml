@@ -1,0 +1,53 @@
+service: pasale
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: ap-south-1
+  versionFunctions: false
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:PutObject"
+        - "s3:GetObject"
+      Resource:
+        - "arn:aws:s3:::pasale-content/*"
+
+package:
+  individually: true
+  exclude:
+      - node_modules/**
+      - frontend/node_modules/**
+      - venv/**
+
+plugins:
+  - serverless-finch
+
+custom:
+  client:
+    bucketName: pasale
+    distributionFolder: frontend/dist/pasale/
+    errorDocument: index.html
+
+resources:
+  Resources:
+    PasaleContent:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: pasale-content
+
+    BucketPolicyForPasaleContent:
+      Type: "AWS::S3::BucketPolicy"
+      Properties:
+        PolicyDocument:
+          Statement:
+            - Sid: PublicReadForGetBucketObjects
+              Effect: Allow
+              Principal: "*"
+              Action:
+                - "s3:GetObject"
+                - "s3:PutObject"
+              Resource: arn:aws:s3:::pasale-content/*
+        Bucket:
+          Ref: PasaleContent
