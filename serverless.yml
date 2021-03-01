@@ -3,23 +3,27 @@ frameworkVersion: "2"
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: nodejs14.x
   region: ap-south-1
   versionFunctions: false
-  iamRoleStatements:
-    - Effect: "Allow"
-      Action:
-        - "s3:PutObject"
-        - "s3:GetObject"
-      Resource:
-        - "arn:aws:s3:::pasale-content/*"
+  apiGateway:
+    shouldStartNameWithService: true
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "s3:PutObject"
+            - "s3:GetObject"
+          Resource:
+            - "arn:aws:s3:::pasale-content/*"
 
 package:
   individually: true
   exclude:
+      - backend/node_modules/**
+      - frontend
       - node_modules/**
-      - frontend/node_modules/**
-      - venv/**
 
 plugins:
   - serverless-finch
@@ -29,6 +33,15 @@ custom:
     bucketName: pasale
     distributionFolder: frontend/dist/pasale/
     errorDocument: index.html
+
+functions:
+  addItemsToDB:
+    handler: backend/addItemToDB.addItemToDB
+    events:
+      - http:
+          path: /addItemToDB
+          method: GET
+          cors: true
 
 resources:
   Resources:
@@ -51,3 +64,21 @@ resources:
               Resource: arn:aws:s3:::pasale-content/*
         Bucket:
           Ref: PasaleContent
+
+    pasale:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: pasale
+        AttributeDefinitions:
+          - AttributeName: pk
+            AttributeType: S
+          - AttributeName: sk
+            AttributeType: S
+        KeySchema:
+          - AttributeName: pk
+            KeyType: HASH
+          - AttributeName: sk
+            KeyType: RANGE
+        ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
