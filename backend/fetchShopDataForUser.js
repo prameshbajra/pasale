@@ -8,7 +8,7 @@ const docClient = new AWS.DynamoDB.DocumentClient({ service: dynamodb });
 
 app.use(express.json());
 
-app.get('/fetchShopDataForUser', async (req, res) => {
+app.post('/fetchShopDataForUser', async (req, res) => {
     const { email } = req.body;
     if (!(email)) {
         res.status(400).json({ error: "Need email." })
