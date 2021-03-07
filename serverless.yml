@@ -13,10 +13,17 @@ provider:
       statements:
         - Effect: "Allow"
           Action:
-            - "s3:PutObject"
-            - "s3:GetObject"
+            - s3:PutObject
+            - s3:GetObject
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
           Resource:
             - "arn:aws:s3:::pasale-content/*"
+            - "arn:aws:dynamodb:*:*:table/*"
 
 custom:
   client:
@@ -35,12 +42,30 @@ plugins:
 
 
 functions:
-  addItemsToDB:
-    handler: backend/addItemToDB.addItemToDB
+  addItemToShop:
+    handler: backend/addItemToShop.addItemToShop
     timeout: 30
     events:
       - http:
-          path: /addItemToDB
+          path: /addItemToShop
+          method: POST
+          cors: true
+  
+  addShopByUser:
+    handler: backend/addShopByUser.addShopByUser
+    timeout: 30
+    events:
+      - http:
+          path: /addShopByUser
+          method: POST
+          cors: true
+
+  fetchShopDataForUser:
+    handler: backend/fetchShopDataForUser.fetchShopDataForUser
+    timeout: 30
+    events:
+      - http:
+          path: /fetchShopDataForUser
           method: GET
           cors: true
 

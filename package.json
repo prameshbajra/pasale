@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/prameshbajra/pasale#readme",
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.8.0",
+    "aws-sdk": "^2.858.0",
     "serverless-finch": "^2.6.0"
   }
 }
