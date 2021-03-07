@@ -48,4 +48,4 @@ app.get('/fetchShopDataForUser', async (req, res) => {
 // app.listen(3000);
 
 // Going serverless ...
-module.exports.addItemToDB = serverless(app);
+module.exports.fetchShopDataForUser = serverless(app);

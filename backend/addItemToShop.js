@@ -41,4 +41,4 @@ app.post('/addItemToShop', (req, res) => {
 // app.listen(3000);
 
 // Going serverless ...
-module.exports.addItemToDB = serverless(app);
+module.exports.addItemToShop = serverless(app);
