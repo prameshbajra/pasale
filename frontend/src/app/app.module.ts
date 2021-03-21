@@ -3,6 +3,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
+
 import { AppComponent } from './app.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { ResisterloginComponent } from './components/resisterlogin/resisterlogin.component';
@@ -25,6 +27,7 @@ import { AddShopComponent } from './components/landing/add-shop/add-shop.compone
         AmplifyUIAngularModule,
         BrowserModule,
         BrowserAnimationsModule,
+        FormsModule,
         PrimeModule
     ],
     providers: [],

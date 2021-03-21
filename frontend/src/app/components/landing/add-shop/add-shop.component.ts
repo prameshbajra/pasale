@@ -16,6 +16,8 @@ export class AddShopComponent implements OnInit {
     displayMaximizable: boolean;
     displayPosition: boolean;
 
+    shopName: String = '';
+
     constructor() { }
 
     ngOnInit(): void {
@@ -41,6 +43,18 @@ export class AddShopComponent implements OnInit {
     showPositionDialog(position: string) {
         this.position = position;
         this.displayPosition = true;
+    }
+
+    isShopNameValid(): boolean {
+        if (this.shopName && this.shopName.length > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    saveShop(): void {
+        this.displayPosition = false;
+        console.log(this.shopName);
     }
 
 }
