@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~10.0.6",
+    "@angular/animations": "^10.0.14",
     "@angular/common": "~10.0.6",
     "@angular/compiler": "~10.0.6",
     "@angular/core": "~10.0.6",
@@ -21,6 +21,9 @@
     "@angular/router": "~10.0.6",
     "@aws-amplify/ui-angular": "^1.0.3",
     "aws-amplify": "^3.3.21",
+    "primeflex": "^2.0.0",
+    "primeicons": "^4.1.0",
+    "primeng": "^11.3.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
