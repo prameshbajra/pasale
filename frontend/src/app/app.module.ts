@@ -10,13 +10,15 @@ import { ResisterloginComponent } from './components/resisterlogin/resisterlogin
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import { PrimeModule } from "./prime.module";
 import { ShopListComponent } from './components/landing/shop-list/shop-list.component';
+import { AddShopComponent } from './components/landing/add-shop/add-shop.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         LandingComponent,
         ResisterloginComponent,
-        ShopListComponent
+        ShopListComponent,
+        AddShopComponent
     ],
     imports: [
         AppRoutingModule,
