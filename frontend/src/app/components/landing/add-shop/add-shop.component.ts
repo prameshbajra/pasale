@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import Auth from '@aws-amplify/auth';
 import { ShopItemService } from 'src/app/services/shop-item.service';
-import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -23,24 +22,13 @@ export class AddShopComponent implements OnInit {
 
     shopName: String = '';
     shopDescription: String = '';
-    currentUser: CognitoUserInterface;
+    currentUser: any;
     email: String = '';
 
-    constructor(private shopItemService: ShopItemService, private authService: AuthService) { }
+    constructor(private shopItemService: ShopItemService) { }
 
     ngOnInit(): void {
-        this.authService.getCurrentUser().subscribe((user: CognitoUserInterface) => {
-            if (user) {
-                this.currentUser = user;
-                this.email = this.currentUser.attributes.email;
-            } else {
-                // TODO: Redirect to home page where amplify will handle the routing ...
-            }
-        }, (error) => {
-            console.error(error);
-        });
     }
-
 
     showModalDialog() {
         this.displayModal = true;
@@ -70,8 +58,12 @@ export class AddShopComponent implements OnInit {
         return false;
     }
 
-    saveShop(): void {
+    async saveShop() {
         this.displayPosition = false;
+        if (this.email.length === 0) {
+            this.currentUser = await Auth.currentAuthenticatedUser();
+            this.email = this.currentUser.attributes.email;
+        }
         const shopPayload = {
             "email": this.email,
             "shopId": uuidv4(),

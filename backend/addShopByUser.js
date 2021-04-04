@@ -10,7 +10,7 @@ app.use(express.json());
 app.use((req, res, next) => {
     res.append('Access-Control-Allow-Origin', ['*']);
     res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.append('Access-Control-Allow-Headers', 'Content-Type');
+    res.append('Access-Control-Allow-Headers', '*');
     next();
 });
 
@@ -19,7 +19,7 @@ app.post('/addShopByUser', function (req, res) {
     if (!(email && shopId && shopName)) {
         res.status(400).json({ error: "Some items are not passed" })
     }
-    var params = {
+    const params = {
         TableName: "pasale",
         Item: {
             "pk": `#USER#${email}`,

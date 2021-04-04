@@ -1,8 +1,7 @@
-import { ChangeDetectorRef } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
-
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AuthState, CognitoUserInterface, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import { AuthService } from 'src/app/services/auth.service';
+
 
 
 @Component({
@@ -22,7 +21,6 @@ export class ResisterloginComponent implements OnInit {
         onAuthUIStateChange((authState, authData) => {
             this.authState = authState;
             this.user = authData as CognitoUserInterface;
-            this.authService.setCurrentUser(this.user);
             this.ref.detectChanges();
         });
     }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import Auth from '@aws-amplify/auth';
 
-import { CognitoUserInterface } from '@aws-amplify/ui-components';
 
 @Component({
   selector: 'app-landing',
@@ -11,22 +10,23 @@ import { CognitoUserInterface } from '@aws-amplify/ui-components';
 
 export class LandingComponent implements OnInit {
 
-    currentUser: CognitoUserInterface | null;
+    currentUser: any;
     email: String;
 
-    constructor(private authService: AuthService) { }
+    constructor() { }
 
     ngOnInit(): void {
-        this.authService.getCurrentUser().subscribe((user: CognitoUserInterface) => {
-            if (user) {
-                this.currentUser = user;
-                this.email = this.currentUser.attributes.email;
-            } else {
-                // TODO: Redirect to home page where amplify will handle the routing ...
-            }
-        }, (error) => {
-            console.error(error);
-        });
+        this.initiateProcess();
     }
+
+    async initiateProcess() {
+        this.currentUser = await Auth.currentAuthenticatedUser();
+        if (this.currentUser) {
+            this.email = this.currentUser.attributes.email;
+        } else {
+            // TODO: Redirect to home page where amplify will handle the routing ...
+        }
+    }
+
 
 }
