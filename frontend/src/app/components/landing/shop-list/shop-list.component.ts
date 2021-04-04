@@ -15,7 +15,7 @@ export class ShopListComponent implements OnInit {
     currentUser: any;
     email: String;
 
-    constructor(private authService: AuthService, private shopItemService: ShopItemService, private ref: ChangeDetectorRef) {
+    constructor(private shopItemService: ShopItemService, private ref: ChangeDetectorRef) {
         this.shopItemService.getShopList().subscribe(shops => {
             this.shopList = shops;
             console.log(this.shopList);

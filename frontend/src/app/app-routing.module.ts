@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { LandingComponent } from './components/landing/landing.component';
+import { RouterModule, Routes } from '@angular/router';
 import { ResisterloginComponent } from './components/resisterlogin/resisterlogin.component';
 
 const routes: Routes = [

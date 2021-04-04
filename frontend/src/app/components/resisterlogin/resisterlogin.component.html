@@ -1,5 +1,5 @@
 <amplify-authenticator>
-    <div class="landing-area">
+    <div class="landing-area" *ngIf="authState=='signedin'">
         <app-landing></app-landing>
     </div>
     <amplify-sign-out></amplify-sign-out>
