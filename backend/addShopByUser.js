@@ -25,17 +25,16 @@ app.post('/addShopByUser', function (req, res) {
             "pk": `#USER#${email}`,
             "sk": `#SHOP#${shopId}`,
             "shopName": shopName,
-            "shopDescription": shopDescription,
-            "shopAdditionalInfo": shopAdditionalInfo
+            "shopDescription": shopDescription
         }
     };
 
     docClient.put(params, (err, data) => {
         if (err) {
-            console.log(err);
+            console.error(err);
             res.status(500).json({ message: "Cannot add data. Please try again later. This might be a server side issue." });
         } else {
-            res.status(200).json({ message: `Shop : ${shopName} Added Succesfully.` });
+            res.status(200).json({ data: params.Item, message: `Shop : ${shopName} Added Succesfully.` });
         }
     });
 });

@@ -18,9 +18,11 @@ export class ShopListComponent implements OnInit {
     constructor(private authService: AuthService, private shopItemService: ShopItemService, private ref: ChangeDetectorRef) {
         this.shopItemService.getShopList().subscribe(shops => {
             this.shopList = shops;
+            console.log(this.shopList);
+            this.ref.detectChanges();
         });
     }
-        
+    
     ngOnInit(): void {
         this.authService.getCurrentUser().subscribe((user: CognitoUserInterface) => {
             if (user) {
@@ -29,7 +31,6 @@ export class ShopListComponent implements OnInit {
                 const userPayload = { email: this.email }
                 this.shopItemService.getShopsForUser(userPayload).subscribe((response) => {
                     this.shopItemService.setShopList(response.shopsForUser);
-                    this.ref.detectChanges();
                 }, (error) => {
                     console.error(error);
                 });
