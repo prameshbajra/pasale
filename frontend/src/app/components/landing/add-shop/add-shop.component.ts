@@ -79,7 +79,9 @@ export class AddShopComponent implements OnInit {
             "shopDescription": this.shopDescription
         }
         this.shopItemService.addShop(shopPayload).subscribe(response => {
-            console.log(response);
+            this.shopItemService.getShopList().subscribe(shops => {
+                this.shopItemService.setShopList([...shops, shopPayload]);
+            });
         }, (error) => {
             console.error(error);
         });
