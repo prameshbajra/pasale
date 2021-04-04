@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LandingComponent } from './components/landing/landing.component';
@@ -28,6 +29,7 @@ import { AddShopComponent } from './components/landing/add-shop/add-shop.compone
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
+        HttpClientModule,
         PrimeModule
     ],
     providers: [],

@@ -18,9 +18,12 @@ export class LandingComponent implements OnInit {
 
     ngOnInit(): void {
         this.authService.getCurrentUser().subscribe((user: CognitoUserInterface) => {
-            console.log(user);
-            this.currentUser = user;
-            this.email = this.currentUser.attributes.email;
+            if (user) {
+                this.currentUser = user;
+                this.email = this.currentUser.attributes.email;
+            } else {
+                // TODO: Redirect to home page where amplify will handle the routing ...
+            }
         }, (error) => {
             console.error(error);
         });
