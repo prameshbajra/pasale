@@ -1,3 +1,13 @@
+
+.shop-list-details{
+    margin-top: 5%;
+
+    .p-tag {
+        background: #ff9900;
+        font-size: 1.5rem;
+    }
+}
+
 .cards-list {
   z-index: 0;
   width: 100%;
@@ -14,6 +24,14 @@
   box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
   cursor: pointer;
   transition: 0.4s;
+
+  .card-details{
+    text-align: center;
+    color: #ff9900;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 10%;
+  }
 }
 
 .card .card_image {

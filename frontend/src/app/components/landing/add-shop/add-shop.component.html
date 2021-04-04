@@ -1,6 +1,8 @@
-<button (click)="showPositionDialog('bottom')" pButton pRipple type="button" label="Add a new store"
-    class="p-button-rounded p-button-warning">
-</button>
+<div class="p-d-flex p-jc-end">
+    <button (click)="showPositionDialog('bottom')" pButton pRipple type="button" label="Add a new store"
+        class="p-button-rounded p-button-warning">
+    </button>
+</div>
 
 <p-dialog header="Add a new shop" [(visible)]="displayPosition" [position]="position" [modal]="true"
     [style]="{width: '80vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
