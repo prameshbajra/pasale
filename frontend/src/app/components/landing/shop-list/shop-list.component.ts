@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import Auth from '@aws-amplify/auth';
-import { AuthService } from 'src/app/services/auth.service';
 import { ShopItemService } from 'src/app/services/shop-item.service';
 
 
@@ -18,7 +17,6 @@ export class ShopListComponent implements OnInit {
     constructor(private shopItemService: ShopItemService, private ref: ChangeDetectorRef) {
         this.shopItemService.getShopList().subscribe(shops => {
             this.shopList = shops;
-            console.log(this.shopList);
             this.ref.detectChanges();
         });
     }
