@@ -14,10 +14,6 @@ import { v4 as uuidv4 } from 'uuid';
 export class AddShopComponent implements OnInit {
 
     position: string;
-    displayModal: boolean;
-    displayBasic: boolean;
-    displayBasic2: boolean;
-    displayMaximizable: boolean;
     displayPosition: boolean;
 
     shopName: String = '';
@@ -28,22 +24,6 @@ export class AddShopComponent implements OnInit {
     constructor(private shopItemService: ShopItemService) { }
 
     ngOnInit(): void {
-    }
-
-    showModalDialog() {
-        this.displayModal = true;
-    }
-
-    showBasicDialog() {
-        this.displayBasic = true;
-    }
-
-    showBasicDialog2() {
-        this.displayBasic2 = true;
-    }
-
-    showMaximizableDialog() {
-        this.displayMaximizable = true;
     }
 
     showPositionDialog(position: string) {
