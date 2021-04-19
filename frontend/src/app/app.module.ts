@@ -1,38 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
-import { LandingComponent } from './components/landing/landing.component';
-import { ResisterloginComponent } from './components/resisterlogin/resisterlogin.component';
-
-import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
-import { PrimeModule } from "./prime.module";
-import { ShopListComponent } from './components/landing/shop-list/shop-list.component';
-import { AddShopComponent } from './components/landing/add-shop/add-shop.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        LandingComponent,
-        ResisterloginComponent,
-        ShopListComponent,
-        AddShopComponent
-    ],
-    imports: [
-        AppRoutingModule,
-        AmplifyUIAngularModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientModule,
-        PrimeModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
