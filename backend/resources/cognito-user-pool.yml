@@ -1,0 +1,86 @@
+Resources:
+  # Cognito - User pool
+  CognitoUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: ${self:custom.COGNITO_USER_POOL}
+      MfaConfiguration: OFF
+      # Set email as an alias
+      UsernameAttributes:
+        - email
+      AutoVerifiedAttributes:
+        - email
+      Policies:
+          PasswordPolicy:
+            TemporaryPasswordValidityDays: 365
+            MinimumLength: 8
+            RequireLowercase: True
+            RequireNumbers: True
+            RequireSymbols: True
+            RequireUppercase: True
+      SmsVerificationMessage: "Your Pasale forgot password verification code is {####}."
+      EmailVerificationSubject: "Your Pasale forgot password verification code"
+      EmailVerificationMessage: "Please use this code to verify your account <b>{####}</b>"
+      SmsAuthenticationMessage: "Your Pasale forgot password verification code is {####}."
+      Schema:
+          - Name: name
+            AttributeDataType: String
+            Mutable: true
+            Required: false
+          - Name: email
+            AttributeDataType: String
+            Mutable: false
+            Required: true
+      AdminCreateUserConfig:
+        AllowAdminCreateUserOnly: false
+        InviteMessageTemplate:
+          EmailSubject: "Your temporary Pasale password"
+          EmailMessage: "Please use this code to verify your account <b>{####}</b>"
+          SMSMessage: "Your Pasale email is {username} and temporary password is {####}."
+
+  # Cognito - Client
+  CognitoUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      ClientName: ${self:custom.COGNITO_USER_POOL_CLIENT}
+      GenerateSecret: false
+      UserPoolId: 
+        Ref: CognitoUserPool
+      ExplicitAuthFlows:
+        - ADMIN_NO_SRP_AUTH
+
+
+  ApiGatewayAuthorizer:
+    DependsOn: 
+      - ApiGatewayRestApi
+    Type: AWS::ApiGateway::Authorizer
+    Properties:
+      Name: cognito-authorizer
+      IdentitySource: method.request.header.Authorization
+      RestApiId: 
+        Ref: ApiGatewayRestApi
+      Type: COGNITO_USER_POOLS
+      ProviderARNs:
+          - Fn::GetAtt: [CognitoUserPool, Arn] 
+
+
+# Print out the Id of the User Pool that is created
+Outputs:
+  UserPoolId:
+    Description: "Remediation API User Pool ID"
+    Value:
+      Ref: CognitoUserPool
+
+  UserPoolClientId:
+    Description: "Remediation API User Pool Client ID"
+    Value:
+      Ref: CognitoUserPoolClient
+  
+  CognitoUserPoolArn:
+      Description: "Remediation API User Pool ARN"
+      Value:
+        Fn::GetAtt:
+          - CognitoUserPool
+          - Arn
+      Export:
+        Name: ${self:custom.APP_NAME}-CognitoUserPoolArn

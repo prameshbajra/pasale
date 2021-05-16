@@ -1,0 +1,9 @@
+registerUser:
+  handler: src/lambdas/http/registerUser.handler
+  events:
+    - http:
+        method: POST
+        path: v1/registerUser
+        cors: true
+
+    

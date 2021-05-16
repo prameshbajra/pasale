@@ -1,0 +1,38 @@
+service: backend-pasale
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  lambdaHashingVersion: 20201221
+
+package:
+  individually: true
+
+
+plugins:
+  - serverless-offline
+  - serverless-iam-roles-per-function
+  - serverless-pseudo-parameters
+
+custom:
+  stage: dev
+  region: ap-south-1
+  ACCOUNT_ID: '#{AWS::AccountId}'
+  STACK_NAME: '#{AWS::StackName}'
+  APP_NAME: ${self:service}-${self:provider.stage}
+
+  COGNITO_USER_POOL: ${self:custom.APP_NAME}-user-pool
+  COGNITO_USER_POOL_CLIENT: ${self:custom.APP_NAME}-user-pool-client
+  COGNITO_IDENTITY_POOL: ${self:custom.APP_NAME}-identity-pool
+  COGNITO_AUTH_ROLE: ${self:custom.APP_NAME}-cognito-auth-role
+  COGNITO_UNAUTH_ROLE: ${self:custom.APP_NAME}-cognito-unauth-role
+
+
+functions:
+  - ${file(resources/functions.yml)}
+
+resources:
+  - ${file(resources/cognito-user-pool.yml)}
+  # - ${file(resources/cognito-identity-pool.yml)}
