@@ -4,11 +4,14 @@ frameworkVersion: '2'
 provider:
   name: aws
   runtime: nodejs12.x
-  stage: dev
+  stage: ${opt:stage, self:custom.stage}
+  region: ${opt:region, self:custom.region}
   lambdaHashingVersion: 20201221
 
 package:
   individually: true
+  patterns:
+    - '!node_modules/**'
 
 
 plugins:

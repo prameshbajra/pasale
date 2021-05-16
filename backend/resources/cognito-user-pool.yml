@@ -14,13 +14,13 @@ Resources:
           PasswordPolicy:
             TemporaryPasswordValidityDays: 365
             MinimumLength: 8
-            RequireLowercase: True
-            RequireNumbers: True
-            RequireSymbols: True
-            RequireUppercase: True
+            RequireLowercase: False
+            RequireNumbers: False
+            RequireSymbols: False
+            RequireUppercase: False
       SmsVerificationMessage: "Your Pasale forgot password verification code is {####}."
       EmailVerificationSubject: "Your Pasale forgot password verification code"
-      EmailVerificationMessage: "Please use this code to verify your account <b>{####}</b>"
+      EmailVerificationMessage: "Hi {username}, <br><br> Please use this code to verify your account <b>{####}</b>"
       SmsAuthenticationMessage: "Your Pasale forgot password verification code is {####}."
       Schema:
           - Name: name
@@ -35,7 +35,7 @@ Resources:
         AllowAdminCreateUserOnly: false
         InviteMessageTemplate:
           EmailSubject: "Your temporary Pasale password"
-          EmailMessage: "Please use this code to verify your account <b>{####}</b>"
+          EmailMessage: "Hi {username}, <br><br> Please use this code to verify your account <b>{####}</b>"
           SMSMessage: "Your Pasale email is {username} and temporary password is {####}."
 
   # Cognito - Client
